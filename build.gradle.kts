@@ -23,25 +23,37 @@ dependencies {
     compile("org.elasticsearch.client:elasticsearch-rest-high-level-client:6.5.2")
 }
 
+// Compile Kotlin to JVM1.6 bytecode.
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.6"
 }
 
-val sourcesJar by tasks.creating(Jar::class) {
-    dependsOn("classes")
-    classifier = "sources"
-    from(sourceSets["main"].allSource)
+// Include project license in generated JARs.
+tasks.withType<Jar> {
+    from(project.projectDir) {
+        include("LICENSE")
+        into("META-INF")
+    }
 }
 
+// Generate Kotlin/Java documentation from sources.
 val dokka by tasks.getting(DokkaTask::class) {
     outputFormat = "html"
     outputDirectory = "$buildDir/javadoc"
 }
 
+// JAR containing Kotlin/Java documentation.
 val javadocJar by tasks.creating(Jar::class) {
     dependsOn(dokka)
     classifier = "javadoc"
     from(dokka.outputDirectory)
+}
+
+// JAR containing all source files.
+val sourcesJar by tasks.creating(Jar::class) {
+    dependsOn("classes")
+    classifier = "sources"
+    from(sourceSets["main"].allSource)
 }
 
 artifacts {
@@ -49,18 +61,3 @@ artifacts {
     add("archives", javadocJar)
 }
 
-maven {
-    pom {
-        project {
-            withGroovyBuilder {
-                "licenses" {
-                    "license" {
-                        "name"("The Apache Software License, Version 2.0")
-                        "url"("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        "distribution"("repo")
-                    }
-                }
-            }
-        }
-    }
-}
