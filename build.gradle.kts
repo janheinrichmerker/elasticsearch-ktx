@@ -10,6 +10,7 @@ plugins {
 }
 
 group = "com.heinrichreimer"
+version = "0.1.1"
 
 repositories {
     jcenter()
