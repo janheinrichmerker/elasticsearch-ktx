@@ -4,7 +4,6 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.rest
 
 import com.heinrichreimer.elasticsearch.kotlin.dsl.rest.*
 import com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.awaitAction
-import de.unihalle.informatik.bigdata.knjigica.indexer.util.elasticsearch.rest.*
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SecurityClient
 import org.elasticsearch.client.security.*

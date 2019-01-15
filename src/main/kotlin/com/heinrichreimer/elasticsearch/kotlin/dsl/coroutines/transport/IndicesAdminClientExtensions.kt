@@ -4,7 +4,6 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.transport
 
 import com.heinrichreimer.elasticsearch.kotlin.dsl.transport.*
 import com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.awaitAction
-import de.unihalle.informatik.bigdata.knjigica.indexer.util.elasticsearch.transport.*
 import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistResponse
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
