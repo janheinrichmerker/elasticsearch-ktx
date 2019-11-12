@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -18,10 +16,10 @@ repositories {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8"))
-    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-//    compile("org.elasticsearch.client:transport:6.5.2")
-    compile("org.elasticsearch.client:elasticsearch-rest-high-level-client:6.5.2")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
+//    compileOnly("org.elasticsearch.client:transport:6.5.2")
+    compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:6.5.2")
 }
 
 // Compile Kotlin to JVM1.6 bytecode.
