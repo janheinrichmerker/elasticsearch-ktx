@@ -83,9 +83,7 @@ inline fun <R> RestHighLevelClient.watcher(block: WatcherClient.() -> R) = watch
 inline fun <R> RestHighLevelClient.graph(block: GraphClient.() -> R) = graphClient.run(block)
 inline fun <R> RestHighLevelClient.license(block: LicenseClient.() -> R) = licenseClient.run(block)
 inline fun <R> RestHighLevelClient.migration(block: MigrationClient.() -> R) = migrationClient.run(block)
-inline fun <R> RestHighLevelClient.machineLearning(block: MachineLearningClient.() -> R) =
-        machineLearningClient.run(block)
-
+inline fun <R> RestHighLevelClient.machineLearning(block: MachineLearningClient.() -> R) = machineLearningClient.run(block)
 inline fun <R> RestHighLevelClient.security(block: SecurityClient.() -> R) = securityClient.run(block)
 inline fun <R> RestHighLevelClient.indexLifecycle(block: IndexLifecycleClient.() -> R) = indexLifecycleClient.run(block)
 inline fun <R> RestHighLevelClient.rollup(block: RollupClient.() -> R) = rollupClient.run(block)
