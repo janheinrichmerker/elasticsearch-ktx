@@ -46,6 +46,8 @@ import org.elasticsearch.client.indices.AnalyzeRequest
 import org.elasticsearch.client.indices.AnalyzeResponse
 import org.elasticsearch.client.indices.CloseIndexResponse
 
+// See [Indices API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html).
+
 suspend inline fun IndicesClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteIndexRequest.() -> Unit = {}): AcknowledgedResponse =
     awaitAction { deleteAsync(options, it, block) }
 
@@ -100,53 +102,14 @@ suspend inline fun IndicesClient.clearCacheAsync(options: RequestOptions = Reque
 suspend inline fun IndicesClient.existsAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexRequest.() -> Unit = {}): Boolean =
     awaitAction { existsAsync(options, it, block) }
 
-suspend inline fun IndicesClient.shrinkAsync(
-    targetIndex: String,
-    sourceIndex: String,
-    options: RequestOptions = RequestOptions.DEFAULT,
-    block: ResizeRequest.() -> Unit = {}
-): ResizeResponse =
-    awaitAction {
-        shrinkAsync(
-            targetIndex,
-            sourceIndex,
-            options,
-            it,
-            block
-        )
-    }
+suspend inline fun IndicesClient.shrinkAsync(targetIndex: String, sourceIndex: String, options: RequestOptions = RequestOptions.DEFAULT, block: ResizeRequest.() -> Unit = {}): ResizeResponse =
+    awaitAction { shrinkAsync(targetIndex, sourceIndex, options, it, block) }
 
-suspend inline fun IndicesClient.splitAsync(
-    targetIndex: String,
-    sourceIndex: String,
-    options: RequestOptions = RequestOptions.DEFAULT,
-    block: ResizeRequest.() -> Unit = {}
-): ResizeResponse =
-    awaitAction {
-        splitAsync(
-            targetIndex,
-            sourceIndex,
-            options,
-            it,
-            block
-        )
-    }
+suspend inline fun IndicesClient.splitAsync(targetIndex: String, sourceIndex: String, options: RequestOptions = RequestOptions.DEFAULT, block: ResizeRequest.() -> Unit = {}): ResizeResponse =
+    awaitAction { splitAsync(targetIndex, sourceIndex, options, it, block) }
 
-suspend inline fun IndicesClient.rolloverAsync(
-    alias: String,
-    newIndexName: String,
-    options: RequestOptions = RequestOptions.DEFAULT,
-    block: RolloverRequest.() -> Unit = {}
-): RolloverResponse =
-    awaitAction {
-        rolloverAsync(
-            alias,
-            newIndexName,
-            options,
-            it,
-            block
-        )
-    }
+suspend inline fun IndicesClient.rolloverAsync(alias: String, newIndexName: String, options: RequestOptions = RequestOptions.DEFAULT, block: RolloverRequest.() -> Unit = {}): RolloverResponse =
+    awaitAction { rolloverAsync(alias, newIndexName, options, it, block) }
 
 suspend inline fun IndicesClient.getAliasAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetAliasesRequest.() -> Unit = {}): GetAliasesResponse =
     awaitAction { getAliasAsync(options, it, block) }
@@ -160,26 +123,8 @@ suspend inline fun IndicesClient.putTemplateAsync(options: RequestOptions = Requ
 suspend inline fun IndicesClient.validateQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ValidateQueryRequest.() -> Unit = {}): ValidateQueryResponse =
     awaitAction { validateQueryAsync(options, it, block) }
 
-suspend inline fun IndicesClient.getTemplateAsync(
-    options: RequestOptions = RequestOptions.DEFAULT,
-    block: org.elasticsearch.client.indices.GetIndexTemplatesRequest.() -> Unit = {}
-): GetIndexTemplatesResponse =
+suspend inline fun IndicesClient.getTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, block: org.elasticsearch.client.indices.GetIndexTemplatesRequest.() -> Unit = {}): GetIndexTemplatesResponse =
     awaitAction { getTemplateAsync(options, it, block) }
 
-suspend inline fun IndicesClient.analyzeAsync(
-    index: String,
-    field: String,
-    vararg text: String,
-    options: RequestOptions = RequestOptions.DEFAULT,
-    block: AnalyzeRequest.() -> Unit = {}
-): AnalyzeResponse =
-    awaitAction {
-        analyzeAsync(
-            index,
-            field,
-            *text,
-            options = options,
-            listener = it,
-            block = block
-        )
-    }
+suspend inline fun IndicesClient.analyzeAsync(index: String, field: String, vararg text: String, options: RequestOptions = RequestOptions.DEFAULT, block: AnalyzeRequest.() -> Unit = {}): AnalyzeResponse =
+    awaitAction { analyzeAsync(index, field, *text, options = options, listener = it, block = block) }

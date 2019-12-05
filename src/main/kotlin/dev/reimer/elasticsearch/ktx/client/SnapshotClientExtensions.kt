@@ -23,6 +23,8 @@ import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SnapshotClient
 import java.io.IOException
 
+// See [Snapshot API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
+
 @Throws(IOException::class)
 inline fun SnapshotClient.getRepository(options: RequestOptions = RequestOptions.DEFAULT, block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
         getRepository(GetRepositoriesRequest().apply(block), options)

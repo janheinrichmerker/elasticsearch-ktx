@@ -11,6 +11,8 @@ import org.elasticsearch.common.bytes.BytesReference
 import org.elasticsearch.common.xcontent.XContentType
 import java.io.IOException
 
+// See [Ingest API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest.html).
+
 @Throws(IOException::class)
 inline fun IngestClient.putPipeline(id: String, source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, block: PutPipelineRequest.() -> Unit = {}): AcknowledgedResponse =
         putPipeline(PutPipelineRequest(id, source, xContentType).apply(block), options)

@@ -22,6 +22,8 @@ import org.elasticsearch.action.support.master.AcknowledgedResponse
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SnapshotClient
 
+// See [Snapshot API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
+
 suspend inline fun SnapshotClient.getRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
         awaitAction { getRepositoryAsync(options, it, block) }
 

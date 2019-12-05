@@ -44,6 +44,8 @@ import org.elasticsearch.script.mustache.SearchTemplateResponse
 import org.elasticsearch.tasks.TaskId
 import java.io.IOException
 
+// See [REST APIs on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html).
+
 inline fun restHighLevelClientOf(vararg nodes: Node, block: RestClientBuilder.() -> Unit = {}) =
         RestHighLevelClient(RestClient.builder(*nodes).apply(block))
 
@@ -98,10 +100,7 @@ fun RestHighLevelClient.ping(): Boolean = ping(RequestOptions.DEFAULT)
 fun RestHighLevelClient.info(): MainResponse = info(RequestOptions.DEFAULT)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.bulk(
-        options: RequestOptions = RequestOptions.DEFAULT,
-        block: BulkRequest.() -> Unit = {}
-): BulkResponse =
+inline fun RestHighLevelClient.bulk(options: RequestOptions = RequestOptions.DEFAULT, block: BulkRequest.() -> Unit = {}): BulkResponse =
         bulk(BulkRequest().apply(block), options)
 
 inline fun RestHighLevelClient.bulkAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkResponse>, block: BulkRequest.() -> Unit = {}) =

@@ -45,6 +45,8 @@ import org.elasticsearch.client.SyncedFlushResponse
 import org.elasticsearch.client.indices.*
 import java.io.IOException
 
+// See [Indices API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html).
+
 @Throws(IOException::class)
 inline fun IndicesClient.delete(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteIndexRequest.() -> Unit = {}): AcknowledgedResponse =
         delete(DeleteIndexRequest().apply(block), options)
@@ -98,11 +100,7 @@ inline fun IndicesClient.openAsync(options: RequestOptions = RequestOptions.DEFA
 inline fun IndicesClient.close(options: RequestOptions = RequestOptions.DEFAULT, block: CloseIndexRequest.() -> Unit = {}): AcknowledgedResponse =
         close(CloseIndexRequest().apply(block), options)
 
-inline fun IndicesClient.closeAsync(
-        options: RequestOptions = RequestOptions.DEFAULT,
-        listener: ActionListener<CloseIndexResponse>,
-        block: CloseIndexRequest.() -> Unit = {}
-) =
+inline fun IndicesClient.closeAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<CloseIndexResponse>, block: CloseIndexRequest.() -> Unit = {}) =
         closeAsync(CloseIndexRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
@@ -218,31 +216,15 @@ inline fun IndicesClient.validateQueryAsync(options: RequestOptions = RequestOpt
         validateQueryAsync(ValidateQueryRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun IndicesClient.getTemplate(
-        options: RequestOptions = RequestOptions.DEFAULT,
-        block: GetIndexTemplatesRequest.() -> Unit = {}
-): GetIndexTemplatesResponse? =
+inline fun IndicesClient.getTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexTemplatesRequest.() -> Unit = {}): GetIndexTemplatesResponse? =
         getTemplate(GetIndexTemplatesRequest().apply(block), options)
 
 inline fun IndicesClient.getTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetIndexTemplatesResponse>, block: GetIndexTemplatesRequest.() -> Unit = {}) =
         getTemplateAsync(GetIndexTemplatesRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun IndicesClient.analyze(
-        index: String,
-        field: String,
-        vararg text: String,
-        options: RequestOptions = RequestOptions.DEFAULT,
-        block: AnalyzeRequest.() -> Unit = {}
-): AnalyzeResponse =
+inline fun IndicesClient.analyze(index: String, field: String, vararg text: String, options: RequestOptions = RequestOptions.DEFAULT, block: AnalyzeRequest.() -> Unit = {}): AnalyzeResponse =
         analyze(AnalyzeRequest.withField(index, field, *text).apply(block), options)
 
-inline fun IndicesClient.analyzeAsync(
-        index: String,
-        field: String,
-        vararg text: String,
-        options: RequestOptions = RequestOptions.DEFAULT,
-        listener: ActionListener<AnalyzeResponse>,
-        block: AnalyzeRequest.() -> Unit = {}
-) =
+inline fun IndicesClient.analyzeAsync(index: String, field: String, vararg text: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AnalyzeResponse>, block: AnalyzeRequest.() -> Unit = {}) =
         analyzeAsync(AnalyzeRequest.withField(index, field, *text).apply(block), options, listener)

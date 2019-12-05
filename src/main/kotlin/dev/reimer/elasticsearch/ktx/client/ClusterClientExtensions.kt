@@ -13,6 +13,8 @@ import org.elasticsearch.client.ClusterClient
 import org.elasticsearch.client.RequestOptions
 import java.io.IOException
 
+// See [Cluster API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html).
+
 @Throws(IOException::class)
 inline fun ClusterClient.putSettings(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterUpdateSettingsRequest.() -> Unit = {}): ClusterUpdateSettingsResponse =
         putSettings(ClusterUpdateSettingsRequest().apply(block), options)
