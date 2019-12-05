@@ -17,13 +17,6 @@ import java.io.IOException
 // See [Cluster API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html).
 
 @Throws(IOException::class)
-inline fun ClusterClient.putSettings(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterUpdateSettingsRequest.() -> Unit = {}): ClusterUpdateSettingsResponse =
-        putSettings(ClusterUpdateSettingsRequest().apply(block), options)
-
-inline fun ClusterClient.putSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ClusterUpdateSettingsResponse>, block: ClusterUpdateSettingsRequest.() -> Unit = {}): Cancellable =
-        putSettingsAsync(ClusterUpdateSettingsRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
 inline fun ClusterClient.getSettings(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterGetSettingsRequest.() -> Unit = {}): ClusterGetSettingsResponse =
         getSettings(ClusterGetSettingsRequest().apply(block), options)
 
@@ -36,3 +29,10 @@ inline fun ClusterClient.health(options: RequestOptions = RequestOptions.DEFAULT
 
 inline fun ClusterClient.healthAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ClusterHealthResponse>, block: ClusterHealthRequest.() -> Unit = {}): Cancellable =
         healthAsync(ClusterHealthRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun ClusterClient.putSettings(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterUpdateSettingsRequest.() -> Unit = {}): ClusterUpdateSettingsResponse =
+        putSettings(ClusterUpdateSettingsRequest().apply(block), options)
+
+inline fun ClusterClient.putSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ClusterUpdateSettingsResponse>, block: ClusterUpdateSettingsRequest.() -> Unit = {}): Cancellable =
+        putSettingsAsync(ClusterUpdateSettingsRequest().apply(block), options, listener)
