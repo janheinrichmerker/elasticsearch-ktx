@@ -7,10 +7,8 @@ import org.elasticsearch.action.support.master.AcknowledgedResponse
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.WatcherClient
 import org.elasticsearch.client.watcher.*
-import org.elasticsearch.protocol.xpack.watcher.DeleteWatchRequest
-import org.elasticsearch.protocol.xpack.watcher.DeleteWatchResponse
-import org.elasticsearch.protocol.xpack.watcher.PutWatchRequest
-import org.elasticsearch.protocol.xpack.watcher.PutWatchResponse
+import org.elasticsearch.common.bytes.BytesReference
+import org.elasticsearch.common.xcontent.XContentType
 import java.io.IOException
 
 @Throws(IOException::class)
@@ -28,18 +26,40 @@ inline fun WatcherClient.stopWatchServiceAsync(options: RequestOptions = Request
         stopWatchServiceAsync(StopWatchServiceRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun WatcherClient.putWatch(options: RequestOptions = RequestOptions.DEFAULT, block: PutWatchRequest.() -> Unit = {}): PutWatchResponse =
-        putWatch(PutWatchRequest().apply(block), options)
+inline fun WatcherClient.putWatch(
+        id: String,
+        source: BytesReference,
+        xContentType: XContentType,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: PutWatchRequest.() -> Unit = {}
+) =
+        putWatch(PutWatchRequest(id, source, xContentType).apply(block), options)
 
-inline fun WatcherClient.putWatchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<PutWatchResponse>, block: PutWatchRequest.() -> Unit = {}) =
-        putWatchAsync(PutWatchRequest().apply(block), options, listener)
+inline fun WatcherClient.putWatchAsync(
+        id: String,
+        source: BytesReference,
+        xContentType: XContentType,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        listener: ActionListener<PutWatchResponse>,
+        block: PutWatchRequest.() -> Unit = {}
+) =
+        putWatchAsync(PutWatchRequest(id, source, xContentType).apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun WatcherClient.deleteWatch(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteWatchRequest.() -> Unit = {}): DeleteWatchResponse =
-        deleteWatch(DeleteWatchRequest().apply(block), options)
+inline fun WatcherClient.deleteWatch(
+        id: String,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: DeleteWatchRequest.() -> Unit = {}
+): DeleteWatchResponse =
+        deleteWatch(DeleteWatchRequest(id).apply(block), options)
 
-inline fun WatcherClient.deleteWatchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<DeleteWatchResponse>, block: DeleteWatchRequest.() -> Unit = {}) =
-        deleteWatchAsync(DeleteWatchRequest().apply(block), options, listener)
+inline fun WatcherClient.deleteWatchAsync(
+        id: String,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        listener: ActionListener<DeleteWatchResponse>,
+        block: DeleteWatchRequest.() -> Unit = {}
+) =
+        deleteWatchAsync(DeleteWatchRequest(id).apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun WatcherClient.ackWatch(watchId: String, vararg actionIds: String, options: RequestOptions = RequestOptions.DEFAULT, block: AckWatchRequest.() -> Unit = {}): AckWatchResponse =

@@ -23,12 +23,12 @@ import org.elasticsearch.action.get.MultiGetRequest
 import org.elasticsearch.action.get.MultiGetResponse
 import org.elasticsearch.action.index.IndexRequest
 import org.elasticsearch.action.index.IndexResponse
-import org.elasticsearch.action.main.MainResponse
 import org.elasticsearch.action.search.*
 import org.elasticsearch.action.support.master.AcknowledgedResponse
 import org.elasticsearch.action.update.UpdateRequest
 import org.elasticsearch.action.update.UpdateResponse
 import org.elasticsearch.client.*
+import org.elasticsearch.client.core.MainResponse
 import org.elasticsearch.index.rankeval.RankEvalRequest
 import org.elasticsearch.index.rankeval.RankEvalResponse
 import org.elasticsearch.index.rankeval.RankEvalSpec

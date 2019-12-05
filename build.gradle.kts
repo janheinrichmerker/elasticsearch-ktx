@@ -11,15 +11,13 @@ group = "com.heinrichreimer"
 version = "0.1.2"
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
-//    compileOnly("org.elasticsearch.client:transport:6.5.2")
-    compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:6.8.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.5.0")
 }
 
 // Compile Kotlin to JVM1.6 bytecode.

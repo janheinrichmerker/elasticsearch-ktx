@@ -2,17 +2,17 @@
 
 package com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.transport
 
-import com.heinrichreimer.elasticsearch.kotlin.dsl.transport.*
 import com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.awaitAction
+import com.heinrichreimer.elasticsearch.kotlin.dsl.transport.*
 import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistResponse
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesResponse
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheResponse
 import org.elasticsearch.action.admin.indices.close.CloseIndexRequest
+import org.elasticsearch.action.admin.indices.close.CloseIndexResponse
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
@@ -89,8 +89,8 @@ suspend inline fun IndicesAdminClient.createAsync(block: CreateIndexRequest.() -
 suspend inline fun IndicesAdminClient.deleteAsync(block: DeleteIndexRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { deleteAsync(it, block) }
 
-suspend inline fun IndicesAdminClient.closeAsync(block: CloseIndexRequest.() -> Unit = {}): AcknowledgedResponse =
-        awaitAction { closeAsync(it, block) }
+suspend inline fun IndicesAdminClient.closeAsync(block: CloseIndexRequest.() -> Unit = {}): CloseIndexResponse =
+    awaitAction { closeAsync(it, block) }
 
 suspend inline fun IndicesAdminClient.openAsync(block: OpenIndexRequest.() -> Unit = {}): OpenIndexResponse =
         awaitAction { openAsync(it, block) }
@@ -140,8 +140,8 @@ suspend inline fun IndicesAdminClient.clearCacheAsync(block: ClearIndicesCacheRe
 suspend inline fun IndicesAdminClient.updateSettingsAsync(block: UpdateSettingsRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { updateSettingsAsync(it, block) }
 
-suspend inline fun IndicesAdminClient.analyzeAsync(block: AnalyzeRequest.() -> Unit = {}): AnalyzeResponse =
-        awaitAction { analyzeAsync(it, block) }
+suspend inline fun IndicesAdminClient.analyzeAsync(block: AnalyzeAction.Request.() -> Unit = {}): AnalyzeAction.Response =
+    awaitAction { analyzeAsync(it, block) }
 
 suspend inline fun IndicesAdminClient.putTemplateAsync(block: PutIndexTemplateRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { putTemplateAsync(it, block) }

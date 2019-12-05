@@ -8,11 +8,16 @@ import com.heinrichreimer.elasticsearch.kotlin.dsl.rest.getRollupJobAsync
 import com.heinrichreimer.elasticsearch.kotlin.dsl.rest.putRollupJobAsync
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.RollupClient
+import org.elasticsearch.client.core.AcknowledgedResponse
 import org.elasticsearch.client.rollup.*
 import org.elasticsearch.client.rollup.job.config.RollupJobConfig
 
-suspend inline fun RollupClient.putRollupJobAsync(config: RollupJobConfig, options: RequestOptions = RequestOptions.DEFAULT, block: PutRollupJobRequest.() -> Unit = {}): PutRollupJobResponse =
-        awaitAction { putRollupJobAsync(config, options, it, block) }
+suspend inline fun RollupClient.putRollupJobAsync(
+    config: RollupJobConfig,
+    options: RequestOptions = RequestOptions.DEFAULT,
+    block: PutRollupJobRequest.() -> Unit = {}
+): AcknowledgedResponse =
+    awaitAction { putRollupJobAsync(config, options, it, block) }
 
 suspend inline fun RollupClient.getRollupJobAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetRollupJobRequest.() -> Unit = {}): GetRollupJobResponse =
         awaitAction { getRollupJobAsync(options, it, block) }

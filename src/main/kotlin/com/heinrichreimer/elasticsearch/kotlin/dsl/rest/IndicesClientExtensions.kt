@@ -5,11 +5,8 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl.rest
 import org.elasticsearch.action.ActionListener
 import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheResponse
-import org.elasticsearch.action.admin.indices.close.CloseIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
@@ -36,7 +33,6 @@ import org.elasticsearch.action.admin.indices.settings.get.GetSettingsResponse
 import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest
 import org.elasticsearch.action.admin.indices.shrink.ResizeRequest
 import org.elasticsearch.action.admin.indices.shrink.ResizeResponse
-import org.elasticsearch.action.admin.indices.template.get.GetIndexTemplatesRequest
 import org.elasticsearch.action.admin.indices.template.get.GetIndexTemplatesResponse
 import org.elasticsearch.action.admin.indices.template.put.PutIndexTemplateRequest
 import org.elasticsearch.action.admin.indices.validate.query.ValidateQueryRequest
@@ -46,6 +42,7 @@ import org.elasticsearch.client.GetAliasesResponse
 import org.elasticsearch.client.IndicesClient
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SyncedFlushResponse
+import org.elasticsearch.client.indices.*
 import java.io.IOException
 
 @Throws(IOException::class)
@@ -101,7 +98,11 @@ inline fun IndicesClient.openAsync(options: RequestOptions = RequestOptions.DEFA
 inline fun IndicesClient.close(options: RequestOptions = RequestOptions.DEFAULT, block: CloseIndexRequest.() -> Unit = {}): AcknowledgedResponse =
         close(CloseIndexRequest().apply(block), options)
 
-inline fun IndicesClient.closeAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: CloseIndexRequest.() -> Unit = {}) =
+inline fun IndicesClient.closeAsync(
+        options: RequestOptions = RequestOptions.DEFAULT,
+        listener: ActionListener<CloseIndexResponse>,
+        block: CloseIndexRequest.() -> Unit = {}
+) =
         closeAsync(CloseIndexRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
@@ -217,15 +218,31 @@ inline fun IndicesClient.validateQueryAsync(options: RequestOptions = RequestOpt
         validateQueryAsync(ValidateQueryRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun IndicesClient.getTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexTemplatesRequest.() -> Unit = {}): GetIndexTemplatesResponse =
+inline fun IndicesClient.getTemplate(
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: GetIndexTemplatesRequest.() -> Unit = {}
+): GetIndexTemplatesResponse? =
         getTemplate(GetIndexTemplatesRequest().apply(block), options)
 
 inline fun IndicesClient.getTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetIndexTemplatesResponse>, block: GetIndexTemplatesRequest.() -> Unit = {}) =
         getTemplateAsync(GetIndexTemplatesRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun IndicesClient.analyze(options: RequestOptions = RequestOptions.DEFAULT, block: AnalyzeRequest.() -> Unit = {}): AnalyzeResponse =
-        analyze(AnalyzeRequest().apply(block), options)
+inline fun IndicesClient.analyze(
+        index: String,
+        field: String,
+        vararg text: String,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: AnalyzeRequest.() -> Unit = {}
+): AnalyzeResponse =
+        analyze(AnalyzeRequest.withField(index, field, *text).apply(block), options)
 
-inline fun IndicesClient.analyzeAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AnalyzeResponse>, block: AnalyzeRequest.() -> Unit = {}) =
-        analyzeAsync(AnalyzeRequest().apply(block), options, listener)
+inline fun IndicesClient.analyzeAsync(
+        index: String,
+        field: String,
+        vararg text: String,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        listener: ActionListener<AnalyzeResponse>,
+        block: AnalyzeRequest.() -> Unit = {}
+) =
+        analyzeAsync(AnalyzeRequest.withField(index, field, *text).apply(block), options, listener)

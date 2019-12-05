@@ -8,11 +8,11 @@ import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.exists.AliasesExistResponse
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesResponse
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheResponse
 import org.elasticsearch.action.admin.indices.close.CloseIndexRequest
+import org.elasticsearch.action.admin.indices.close.CloseIndexResponse
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
@@ -113,10 +113,13 @@ inline fun IndicesAdminClient.delete(block: DeleteIndexRequest.() -> Unit = {}):
 inline fun IndicesAdminClient.deleteAsync(listener: ActionListener<AcknowledgedResponse>, block: DeleteIndexRequest.() -> Unit = {}) =
         delete(DeleteIndexRequest().apply(block), listener)
 
-inline fun IndicesAdminClient.close(block: CloseIndexRequest.() -> Unit = {}): ActionFuture<AcknowledgedResponse> =
+inline fun IndicesAdminClient.close(block: CloseIndexRequest.() -> Unit = {}): ActionFuture<CloseIndexResponse> =
         close(CloseIndexRequest().apply(block))
 
-inline fun IndicesAdminClient.closeAsync(listener: ActionListener<AcknowledgedResponse>, block: CloseIndexRequest.() -> Unit = {}) =
+inline fun IndicesAdminClient.closeAsync(
+        listener: ActionListener<CloseIndexResponse>,
+        block: CloseIndexRequest.() -> Unit = {}
+) =
         close(CloseIndexRequest().apply(block), listener)
 
 inline fun IndicesAdminClient.open(block: OpenIndexRequest.() -> Unit = {}): ActionFuture<OpenIndexResponse> =
@@ -215,11 +218,14 @@ inline fun IndicesAdminClient.updateSettings(block: UpdateSettingsRequest.() -> 
 inline fun IndicesAdminClient.updateSettingsAsync(listener: ActionListener<AcknowledgedResponse>, block: UpdateSettingsRequest.() -> Unit = {}) =
         updateSettings(UpdateSettingsRequest().apply(block), listener)
 
-inline fun IndicesAdminClient.analyze(block: AnalyzeRequest.() -> Unit = {}): ActionFuture<AnalyzeResponse> =
-        analyze(AnalyzeRequest().apply(block))
+inline fun IndicesAdminClient.analyze(block: AnalyzeAction.Request.() -> Unit = {}): ActionFuture<AnalyzeAction.Response> =
+        analyze(AnalyzeAction.Request().apply(block))
 
-inline fun IndicesAdminClient.analyzeAsync(listener: ActionListener<AnalyzeResponse>, block: AnalyzeRequest.() -> Unit = {}) =
-        analyze(AnalyzeRequest().apply(block), listener)
+inline fun IndicesAdminClient.analyzeAsync(
+        listener: ActionListener<AnalyzeAction.Response>,
+        block: AnalyzeAction.Request.() -> Unit = {}
+) =
+        analyze(AnalyzeAction.Request().apply(block), listener)
 
 inline fun IndicesAdminClient.putTemplate(block: PutIndexTemplateRequest.() -> Unit = {}): ActionFuture<AcknowledgedResponse> =
         putTemplate(PutIndexTemplateRequest().apply(block))

@@ -2,15 +2,12 @@
 
 package com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.rest
 
-import com.heinrichreimer.elasticsearch.kotlin.dsl.rest.*
 import com.heinrichreimer.elasticsearch.kotlin.dsl.coroutines.awaitAction
+import com.heinrichreimer.elasticsearch.kotlin.dsl.rest.*
 import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequest
-import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheResponse
-import org.elasticsearch.action.admin.indices.close.CloseIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
@@ -37,7 +34,6 @@ import org.elasticsearch.action.admin.indices.settings.get.GetSettingsResponse
 import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest
 import org.elasticsearch.action.admin.indices.shrink.ResizeRequest
 import org.elasticsearch.action.admin.indices.shrink.ResizeResponse
-import org.elasticsearch.action.admin.indices.template.get.GetIndexTemplatesRequest
 import org.elasticsearch.action.admin.indices.template.get.GetIndexTemplatesResponse
 import org.elasticsearch.action.admin.indices.template.put.PutIndexTemplateRequest
 import org.elasticsearch.action.admin.indices.validate.query.ValidateQueryRequest
@@ -47,6 +43,9 @@ import org.elasticsearch.client.GetAliasesResponse
 import org.elasticsearch.client.IndicesClient
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SyncedFlushResponse
+import org.elasticsearch.client.indices.AnalyzeRequest
+import org.elasticsearch.client.indices.AnalyzeResponse
+import org.elasticsearch.client.indices.CloseIndexResponse
 
 suspend inline fun IndicesClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteIndexRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { deleteAsync(options, it, block) }
@@ -69,8 +68,11 @@ suspend inline fun IndicesClient.updateAliasesAsync(options: RequestOptions = Re
 suspend inline fun IndicesClient.openAsync(options: RequestOptions = RequestOptions.DEFAULT, block: OpenIndexRequest.() -> Unit = {}): OpenIndexResponse =
         awaitAction { openAsync(options, it, block) }
 
-suspend inline fun IndicesClient.closeAsync(options: RequestOptions = RequestOptions.DEFAULT, block: CloseIndexRequest.() -> Unit = {}): AcknowledgedResponse =
-        awaitAction { closeAsync(options, it, block) }
+suspend inline fun IndicesClient.closeAsync(
+    options: RequestOptions = RequestOptions.DEFAULT,
+    block: org.elasticsearch.client.indices.CloseIndexRequest.() -> Unit = {}
+): CloseIndexResponse =
+    awaitAction { closeAsync(options, it, block) }
 
 suspend inline fun IndicesClient.existsAliasAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetAliasesRequest.() -> Unit = {}): Boolean =
         awaitAction { existsAliasAsync(options, it, block) }
@@ -120,8 +122,17 @@ suspend inline fun IndicesClient.putTemplateAsync(options: RequestOptions = Requ
 suspend inline fun IndicesClient.validateQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ValidateQueryRequest.() -> Unit = {}): ValidateQueryResponse =
         awaitAction { validateQueryAsync(options, it, block) }
 
-suspend inline fun IndicesClient.getTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexTemplatesRequest.() -> Unit = {}): GetIndexTemplatesResponse =
-        awaitAction { getTemplateAsync(options, it, block) }
+suspend inline fun IndicesClient.getTemplateAsync(
+    options: RequestOptions = RequestOptions.DEFAULT,
+    block: org.elasticsearch.client.indices.GetIndexTemplatesRequest.() -> Unit = {}
+): GetIndexTemplatesResponse =
+    awaitAction { getTemplateAsync(options, it, block) }
 
-suspend inline fun IndicesClient.analyzeAsync(options: RequestOptions = RequestOptions.DEFAULT, block: AnalyzeRequest.() -> Unit = {}): AnalyzeResponse =
-        awaitAction { analyzeAsync(options, it, block) }
+suspend inline fun IndicesClient.analyzeAsync(
+    index: String,
+    field: String,
+    vararg text: String,
+    options: RequestOptions = RequestOptions.DEFAULT,
+    block: AnalyzeRequest.() -> Unit = {}
+): AnalyzeResponse =
+    awaitAction { analyzeAsync(index, field, *text, options = options, listener = it, block = block) }

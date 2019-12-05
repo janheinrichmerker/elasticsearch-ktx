@@ -5,8 +5,8 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl.rest
 import org.elasticsearch.action.ActionListener
 import org.elasticsearch.client.GraphClient
 import org.elasticsearch.client.RequestOptions
-import org.elasticsearch.protocol.xpack.graph.GraphExploreRequest
-import org.elasticsearch.protocol.xpack.graph.GraphExploreResponse
+import org.elasticsearch.client.graph.GraphExploreRequest
+import org.elasticsearch.client.graph.GraphExploreResponse
 import java.io.IOException
 
 @Throws(IOException::class)

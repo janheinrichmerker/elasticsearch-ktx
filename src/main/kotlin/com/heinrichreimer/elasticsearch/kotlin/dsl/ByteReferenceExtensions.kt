@@ -3,7 +3,6 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl
 import org.apache.lucene.util.BytesRef
 import org.elasticsearch.common.bytes.*
 import org.elasticsearch.common.lease.Releasable
-import org.elasticsearch.common.util.BigArrays
 import java.nio.ByteBuffer
 
 fun ByteArray.toBytesReference(range: ClosedRange<Int> = 0..size): BytesReference =
@@ -14,23 +13,15 @@ fun BytesRef.toBytesReference(deepCopy: Boolean = false): BytesReference = Bytes
 fun String.toBytesReference(): BytesReference = BytesArray(this)
 
 fun org.elasticsearch.common.util.ByteArray.toBytesReference(
-        bigArrays: BigArrays = BigArrays.NON_RECYCLING_INSTANCE,
-        range: ClosedRange<Int> = 0..(size().toInt())
-): BytesReference = PagedBytesReference(bigArrays, this, range.start, range.endInclusive)
-
-fun org.elasticsearch.common.util.ByteArray.toBytesReference(
-        bigArrays: BigArrays = BigArrays.NON_RECYCLING_INSTANCE,
-        offset: Int = 0,
         length: Int
-): BytesReference = toBytesReference(bigArrays, offset..length)
+): BytesReference = PagedBytesReference(this, length)
 
 fun org.elasticsearch.common.util.ByteArray.toBytesReference(
-        bigArrays: BigArrays = BigArrays.NON_RECYCLING_INSTANCE,
         length: Int,
         releasable: Releasable
-): BytesReference = ReleasablePagedBytesReference(bigArrays, this, length, releasable)
+): BytesReference = ReleasablePagedBytesReference(this, length, releasable)
 
-fun ByteBuffer.toBytesReference(): BytesReference = ByteBufferReference(this)
+fun ByteBuffer.toBytesReference(): BytesReference = BytesReference.fromByteBuffers(arrayOf(this))
 
 fun Array<BytesReference>.toBytesReference(): BytesReference = CompositeBytesReference(*this)
 fun Collection<BytesReference>.toBytesReference(): BytesReference = toTypedArray().toBytesReference()

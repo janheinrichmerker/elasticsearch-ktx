@@ -5,15 +5,25 @@ package com.heinrichreimer.elasticsearch.kotlin.dsl.rest
 import org.elasticsearch.action.ActionListener
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.RollupClient
+import org.elasticsearch.client.core.AcknowledgedResponse
 import org.elasticsearch.client.rollup.*
 import org.elasticsearch.client.rollup.job.config.RollupJobConfig
 import java.io.IOException
 
 @Throws(IOException::class)
-inline fun RollupClient.putRollupJob(config: RollupJobConfig, options: RequestOptions = RequestOptions.DEFAULT, block: PutRollupJobRequest.() -> Unit = {}): PutRollupJobResponse =
+inline fun RollupClient.putRollupJob(
+        config: RollupJobConfig,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: PutRollupJobRequest.() -> Unit = {}
+): AcknowledgedResponse =
         putRollupJob(PutRollupJobRequest(config).apply(block), options)
 
-inline fun RollupClient.putRollupJobAsync(config: RollupJobConfig, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<PutRollupJobResponse>, block: PutRollupJobRequest.() -> Unit = {}) =
+inline fun RollupClient.putRollupJobAsync(
+        config: RollupJobConfig,
+        options: RequestOptions = RequestOptions.DEFAULT,
+        listener: ActionListener<AcknowledgedResponse>,
+        block: PutRollupJobRequest.() -> Unit = {}
+) =
         putRollupJobAsync(PutRollupJobRequest(config).apply(block), options, listener)
 
 @Throws(IOException::class)
