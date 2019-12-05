@@ -7,8 +7,6 @@ import org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest
 import org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheRequest
 import org.elasticsearch.action.admin.indices.cache.clear.ClearIndicesCacheResponse
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest
 import org.elasticsearch.action.admin.indices.flush.FlushRequest
 import org.elasticsearch.action.admin.indices.flush.FlushResponse
@@ -42,17 +40,15 @@ import org.elasticsearch.client.GetAliasesResponse
 import org.elasticsearch.client.IndicesClient
 import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.SyncedFlushResponse
-import org.elasticsearch.client.indices.AnalyzeRequest
-import org.elasticsearch.client.indices.AnalyzeResponse
-import org.elasticsearch.client.indices.CloseIndexResponse
+import org.elasticsearch.client.indices.*
 
 // See [Indices API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices.html).
 
 suspend inline fun IndicesClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteIndexRequest.() -> Unit = {}): AcknowledgedResponse =
     awaitAction { deleteAsync(options, it, block) }
 
-suspend inline fun IndicesClient.createAsync(options: RequestOptions = RequestOptions.DEFAULT, block: CreateIndexRequest.() -> Unit = {}): CreateIndexResponse =
-    awaitAction { createAsync(options, it, block) }
+suspend inline fun IndicesClient.createAsync(index: String, options: RequestOptions = RequestOptions.DEFAULT, block: CreateIndexRequest.() -> Unit = {}): CreateIndexResponse =
+    awaitAction { createAsync(index, options, it, block) }
 
 suspend inline fun IndicesClient.putMappingAsync(options: RequestOptions = RequestOptions.DEFAULT, block: PutMappingRequest.() -> Unit = {}): AcknowledgedResponse =
     awaitAction { putMappingAsync(options, it, block) }
