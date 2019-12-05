@@ -2,7 +2,7 @@
 
 # elasticsearch-ktx<sup>[α](#status-α)</sup>
 
-Kotlin extensions for Elasticsearch [Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html) (unofficial).
+Kotlin extensions for the Elasticsearch [Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html) (unofficial).
 
 ## Gradle Dependency
 
