@@ -1,13 +1,12 @@
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.11"
-    maven
+    `maven-publish`
     id("org.jetbrains.dokka") version "0.9.17"
 }
 
-group = "com.heinrichreimer"
+group = "dev.reimer"
 version = "0.1.2"
 
 repositories {
@@ -20,9 +19,9 @@ dependencies {
     compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.5.0")
 }
 
-// Compile Kotlin to JVM1.6 bytecode.
+// Compile Kotlin to JVM1.8 bytecode.
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.6"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 // Include project license in generated JARs.
@@ -34,27 +33,34 @@ tasks.withType<Jar> {
 }
 
 // Generate Kotlin/Java documentation from sources.
-val dokka by tasks.getting(DokkaTask::class) {
+tasks.dokka {
     outputFormat = "html"
-    outputDirectory = "$buildDir/javadoc"
 }
 
 // JAR containing Kotlin/Java documentation.
-val javadocJar by tasks.creating(Jar::class) {
-    dependsOn(dokka)
-    classifier = "javadoc"
-    from(dokka.outputDirectory)
+val javadoc = tasks.create<Jar>("javadocJar") {
+    dependsOn(tasks.dokka)
+    from(tasks.dokka.get().outputDirectory)
 }
 
 // JAR containing all source files.
-val sourcesJar by tasks.creating(Jar::class) {
+val sources = tasks.create<Jar>("sourcesJar") {
     dependsOn("classes")
-    classifier = "sources"
-    from(sourceSets["main"].allSource)
+    from(sourceSets.main.get().allSource)
 }
 
-artifacts {
-    add("archives", sourcesJar)
-    add("archives", javadocJar)
-}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
 
+            artifact(sources) {
+                classifier = "sources"
+            }
+
+            artifact(javadoc) {
+                classifier = "javadoc"
+            }
+        }
+    }
+}
