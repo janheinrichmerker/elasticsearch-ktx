@@ -64,7 +64,11 @@ inline val RestHighLevelClient.licenseClient: LicenseClient get() = license()
 inline val RestHighLevelClient.migrationClient: MigrationClient get() = migration()
 inline val RestHighLevelClient.machineLearningClient: MachineLearningClient get() = machineLearning()
 inline val RestHighLevelClient.securityClient: SecurityClient get() = security()
+inline val RestHighLevelClient.indexLifecycleClient: IndexLifecycleClient get() = indexLifecycle()
 inline val RestHighLevelClient.rollupClient: RollupClient get() = rollup()
+inline val RestHighLevelClient.ccrClient: CcrClient get() = ccr()
+inline val RestHighLevelClient.transformClient: TransformClient get() = transform()
+inline val RestHighLevelClient.enrichClient: EnrichClient get() = enrich()
 
 inline fun <R> RestHighLevelClient.lowLevel(block: RestClient.() -> R) = lowLevelClient.run(block)
 inline fun <R> RestHighLevelClient.indices(block: IndicesClient.() -> R) = indicesClient.run(block)
@@ -77,9 +81,15 @@ inline fun <R> RestHighLevelClient.watcher(block: WatcherClient.() -> R) = watch
 inline fun <R> RestHighLevelClient.graph(block: GraphClient.() -> R) = graphClient.run(block)
 inline fun <R> RestHighLevelClient.license(block: LicenseClient.() -> R) = licenseClient.run(block)
 inline fun <R> RestHighLevelClient.migration(block: MigrationClient.() -> R) = migrationClient.run(block)
-inline fun <R> RestHighLevelClient.machineLearning(block: MachineLearningClient.() -> R) = machineLearningClient.run(block)
+inline fun <R> RestHighLevelClient.machineLearning(block: MachineLearningClient.() -> R) =
+        machineLearningClient.run(block)
+
 inline fun <R> RestHighLevelClient.security(block: SecurityClient.() -> R) = securityClient.run(block)
+inline fun <R> RestHighLevelClient.indexLifecycle(block: IndexLifecycleClient.() -> R) = indexLifecycleClient.run(block)
 inline fun <R> RestHighLevelClient.rollup(block: RollupClient.() -> R) = rollupClient.run(block)
+inline fun <R> RestHighLevelClient.crc(block: CcrClient.() -> R) = ccrClient.run(block)
+inline fun <R> RestHighLevelClient.transform(block: TransformClient.() -> R) = transformClient.run(block)
+inline fun <R> RestHighLevelClient.enrich(block: EnrichClient.() -> R) = enrichClient.run(block)
 
 @Throws(IOException::class)
 fun RestHighLevelClient.ping(): Boolean = ping(RequestOptions.DEFAULT)
@@ -88,7 +98,10 @@ fun RestHighLevelClient.ping(): Boolean = ping(RequestOptions.DEFAULT)
 fun RestHighLevelClient.info(): MainResponse = info(RequestOptions.DEFAULT)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.bulk(options: RequestOptions = RequestOptions.DEFAULT, block: BulkRequest.() -> Unit = {}): BulkResponse =
+inline fun RestHighLevelClient.bulk(
+        options: RequestOptions = RequestOptions.DEFAULT,
+        block: BulkRequest.() -> Unit = {}
+): BulkResponse =
         bulk(BulkRequest().apply(block), options)
 
 inline fun RestHighLevelClient.bulkAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkResponse>, block: BulkRequest.() -> Unit = {}) =

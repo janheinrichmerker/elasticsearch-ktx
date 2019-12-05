@@ -37,6 +37,14 @@ dependencies {
 
 </details>
 
+## ToDo's
+
+- Check API changes from 6.8.2 to 7.5.0.
+- Add `IndexLifecycleClient` extensions.
+- Add `CcrClient` extensions.
+- Add `TransformClient` extensions.
+- Add `EnrichClient` extensions.
+
 ## Status α
 
 ⚠️ _Warning:_ This project is in an experimental alpha stage:
