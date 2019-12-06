@@ -15,11 +15,11 @@ import java.io.IOException
 // See [Ingest API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest.html).
 
 @Throws(IOException::class)
-inline fun IngestClient.putPipeline(id: String, source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, block: PutPipelineRequest.() -> Unit = {}): AcknowledgedResponse =
-        putPipeline(PutPipelineRequest(id, source, xContentType).apply(block), options)
+inline fun IngestClient.deletePipeline(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: DeletePipelineRequest.() -> Unit = {}): AcknowledgedResponse =
+        deletePipeline(DeletePipelineRequest(id).apply(block), options)
 
-inline fun IngestClient.putPipelineAsync(id: String, source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutPipelineRequest.() -> Unit = {}): Cancellable =
-        putPipelineAsync(PutPipelineRequest(id, source, xContentType).apply(block), options, listener)
+inline fun IngestClient.deletePipelineAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeletePipelineRequest.() -> Unit = {}): Cancellable =
+        deletePipelineAsync(DeletePipelineRequest(id).apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun IngestClient.getPipeline(options: RequestOptions = RequestOptions.DEFAULT, block: GetPipelineRequest.() -> Unit = {}): GetPipelineResponse =
@@ -29,11 +29,11 @@ inline fun IngestClient.getPipelineAsync(options: RequestOptions = RequestOption
         getPipelineAsync(GetPipelineRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun IngestClient.deletePipeline(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: DeletePipelineRequest.() -> Unit = {}): AcknowledgedResponse =
-        deletePipeline(DeletePipelineRequest(id).apply(block), options)
+inline fun IngestClient.putPipeline(id: String, source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, block: PutPipelineRequest.() -> Unit = {}): AcknowledgedResponse =
+        putPipeline(PutPipelineRequest(id, source, xContentType).apply(block), options)
 
-inline fun IngestClient.deletePipelineAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeletePipelineRequest.() -> Unit = {}): Cancellable =
-        deletePipelineAsync(DeletePipelineRequest(id).apply(block), options, listener)
+inline fun IngestClient.putPipelineAsync(id: String, source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutPipelineRequest.() -> Unit = {}): Cancellable =
+        putPipelineAsync(PutPipelineRequest(id, source, xContentType).apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun IngestClient.simulate(source: BytesReference, xContentType: XContentType, options: RequestOptions = RequestOptions.DEFAULT, block: SimulatePipelineRequest.() -> Unit = {}): SimulatePipelineResponse =
