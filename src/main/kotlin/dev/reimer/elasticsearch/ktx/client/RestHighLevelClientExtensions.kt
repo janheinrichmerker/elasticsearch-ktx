@@ -105,18 +105,20 @@ inline fun RestHighLevelClient.bulkAsync(options: RequestOptions = RequestOption
         bulkAsync(BulkRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.reindex(options: RequestOptions = RequestOptions.DEFAULT, block: ReindexRequest.() -> Unit = {}): BulkByScrollResponse =
-        reindex(ReindexRequest().apply(block), options)
+inline fun RestHighLevelClient.clearScroll(options: RequestOptions = RequestOptions.DEFAULT, block: ClearScrollRequest.() -> Unit = {}): ClearScrollResponse =
+        clearScroll(ClearScrollRequest().apply(block), options)
 
-inline fun RestHighLevelClient.reindexAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkByScrollResponse>, block: ReindexRequest.() -> Unit = {}): Cancellable =
-        reindexAsync(ReindexRequest().apply(block), options, listener)
+inline fun RestHighLevelClient.clearScrollAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ClearScrollResponse>, block: ClearScrollRequest.() -> Unit = {}): Cancellable =
+        clearScrollAsync(ClearScrollRequest().apply(block), options, listener)
+
+// TODO count
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.updateByQuery(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
-        updateByQuery(UpdateByQueryRequest().apply(block), options)
+inline fun RestHighLevelClient.delete(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRequest.() -> Unit = {}): DeleteResponse =
+        delete(DeleteRequest().apply(block), options)
 
-inline fun RestHighLevelClient.updateByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkByScrollResponse>, block: UpdateByQueryRequest.() -> Unit = {}): Cancellable =
-        updateByQueryAsync(UpdateByQueryRequest().apply(block), options, listener)
+inline fun RestHighLevelClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<DeleteResponse>, block: DeleteRequest.() -> Unit = {}): Cancellable =
+        deleteAsync(DeleteRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun RestHighLevelClient.deleteByQuery(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
@@ -133,32 +135,11 @@ inline fun RestHighLevelClient.deleteByQueryRethrottleAsync(taskId: TaskId, requ
         deleteByQueryRethrottleAsync(RethrottleRequest(taskId, requestsPerSecond).apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.updateByQueryRethrottle(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
-        updateByQueryRethrottle(RethrottleRequest(taskId, requestsPerSecond).apply(block), options)
+inline fun RestHighLevelClient.deleteScript(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: DeleteStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
+        deleteScript(DeleteStoredScriptRequest(id).apply(block), options)
 
-inline fun RestHighLevelClient.updateByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ListTasksResponse>, block: RethrottleRequest.() -> Unit = {}): Cancellable =
-        updateByQueryRethrottleAsync(RethrottleRequest(taskId, requestsPerSecond).apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.reindexRethrottle(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
-        reindexRethrottle(RethrottleRequest(taskId, requestsPerSecond).apply(block), options)
-
-inline fun RestHighLevelClient.reindexRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ListTasksResponse>, block: RethrottleRequest.() -> Unit = {}): Cancellable =
-        reindexRethrottleAsync(RethrottleRequest(taskId, requestsPerSecond).apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.get(options: RequestOptions = RequestOptions.DEFAULT, block: GetRequest.() -> Unit = {}): GetResponse =
-        get(GetRequest().apply(block), options)
-
-inline fun RestHighLevelClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetResponse>, block: GetRequest.() -> Unit = {}): Cancellable =
-        getAsync(GetRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.mget(options: RequestOptions = RequestOptions.DEFAULT, block: MultiGetRequest.() -> Unit = {}): MultiGetResponse =
-        mget(MultiGetRequest().apply(block), options)
-
-inline fun RestHighLevelClient.mgetAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiGetResponse>, block: MultiGetRequest.() -> Unit = {}): Cancellable =
-        mgetAsync(MultiGetRequest().apply(block), options, listener)
+inline fun RestHighLevelClient.deleteScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteStoredScriptRequest.() -> Unit = {}): Cancellable =
+        deleteScriptAsync(DeleteStoredScriptRequest(id).apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun RestHighLevelClient.exists(options: RequestOptions = RequestOptions.DEFAULT, block: GetRequest.() -> Unit = {}): Boolean =
@@ -167,61 +148,7 @@ inline fun RestHighLevelClient.exists(options: RequestOptions = RequestOptions.D
 inline fun RestHighLevelClient.existsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<Boolean>, block: GetRequest.() -> Unit = {}): Cancellable =
         existsAsync(GetRequest().apply(block), options, listener)
 
-@Throws(IOException::class)
-inline fun RestHighLevelClient.index(options: RequestOptions = RequestOptions.DEFAULT, block: IndexRequest.() -> Unit = {}): IndexResponse =
-        index(IndexRequest().apply(block), options)
-
-inline fun RestHighLevelClient.indexAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<IndexResponse>, block: IndexRequest.() -> Unit = {}): Cancellable =
-        indexAsync(IndexRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.update(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateRequest.() -> Unit = {}): UpdateResponse =
-        update(UpdateRequest().apply(block), options)
-
-inline fun RestHighLevelClient.updateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<UpdateResponse>, block: UpdateRequest.() -> Unit = {}): Cancellable =
-        updateAsync(UpdateRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.delete(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRequest.() -> Unit = {}): DeleteResponse =
-        delete(DeleteRequest().apply(block), options)
-
-inline fun RestHighLevelClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<DeleteResponse>, block: DeleteRequest.() -> Unit = {}): Cancellable =
-        deleteAsync(DeleteRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.search(options: RequestOptions = RequestOptions.DEFAULT, block: SearchRequest.() -> Unit = {}): SearchResponse =
-        search(SearchRequest().apply(block), options)
-
-inline fun RestHighLevelClient.searchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchResponse>, block: SearchRequest.() -> Unit = {}): Cancellable =
-        searchAsync(SearchRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.msearch(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchRequest.() -> Unit = {}): MultiSearchResponse =
-        msearch(MultiSearchRequest().apply(block), options)
-
-inline fun RestHighLevelClient.msearchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiSearchResponse>, block: MultiSearchRequest.() -> Unit = {}): Cancellable =
-        msearchAsync(MultiSearchRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.scroll(options: RequestOptions = RequestOptions.DEFAULT, block: SearchScrollRequest.() -> Unit = {}): SearchResponse =
-        scroll(SearchScrollRequest().apply(block), options)
-
-inline fun RestHighLevelClient.scrollAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchResponse>, block: SearchScrollRequest.() -> Unit = {}): Cancellable =
-        scrollAsync(SearchScrollRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.clearScroll(options: RequestOptions = RequestOptions.DEFAULT, block: ClearScrollRequest.() -> Unit = {}): ClearScrollResponse =
-        clearScroll(ClearScrollRequest().apply(block), options)
-
-inline fun RestHighLevelClient.clearScrollAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ClearScrollResponse>, block: ClearScrollRequest.() -> Unit = {}): Cancellable =
-        clearScrollAsync(ClearScrollRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.searchTemplate(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, block: SearchTemplateRequest.() -> Unit = {}): SearchTemplateResponse =
-        searchTemplate(SearchTemplateRequest().apply { setScript(script); setScriptType(scriptType) }.apply(block), options)
-
-inline fun RestHighLevelClient.searchTemplateAsync(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchTemplateResponse>, block: SearchTemplateRequest.() -> Unit = {}): Cancellable =
-        searchTemplateAsync(SearchTemplateRequest().apply { setScript(script); setScriptType(scriptType) }.apply(block), options, listener)
+// TODO existsSource
 
 @Throws(IOException::class)
 inline fun RestHighLevelClient.explain(options: RequestOptions = RequestOptions.DEFAULT, block: ExplainRequest.() -> Unit = {}): ExplainResponse =
@@ -231,25 +158,18 @@ inline fun RestHighLevelClient.explainAsync(options: RequestOptions = RequestOpt
         explainAsync(ExplainRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.rankEval(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, block: RankEvalRequest.() -> Unit = {}): RankEvalResponse =
-        rankEval(RankEvalRequest(rankingEvaluationSpec, indices).apply(block), options)
-
-inline fun RestHighLevelClient.rankEvalAsync(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<RankEvalResponse>, block: RankEvalRequest.() -> Unit = {}): Cancellable =
-        rankEvalAsync(RankEvalRequest(rankingEvaluationSpec, indices).apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun RestHighLevelClient.msearchTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchTemplateRequest.() -> Unit = {}): MultiSearchTemplateResponse =
-        msearchTemplate(MultiSearchTemplateRequest().apply(block), options)
-
-inline fun RestHighLevelClient.msearchTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiSearchTemplateResponse>, block: MultiSearchTemplateRequest.() -> Unit = {}): Cancellable =
-        msearchTemplateAsync(MultiSearchTemplateRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
 inline fun RestHighLevelClient.fieldCaps(options: RequestOptions = RequestOptions.DEFAULT, block: FieldCapabilitiesRequest.() -> Unit = {}): FieldCapabilitiesResponse =
         fieldCaps(FieldCapabilitiesRequest().apply(block), options)
 
 inline fun RestHighLevelClient.fieldCapsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<FieldCapabilitiesResponse>, block: FieldCapabilitiesRequest.() -> Unit = {}): Cancellable =
         fieldCapsAsync(FieldCapabilitiesRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.get(options: RequestOptions = RequestOptions.DEFAULT, block: GetRequest.() -> Unit = {}): GetResponse =
+        get(GetRequest().apply(block), options)
+
+inline fun RestHighLevelClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetResponse>, block: GetRequest.() -> Unit = {}): Cancellable =
+        getAsync(GetRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun RestHighLevelClient.getScript(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: GetStoredScriptRequest.() -> Unit = {}): GetStoredScriptResponse =
@@ -259,11 +179,34 @@ inline fun RestHighLevelClient.getScriptAsync(id: String, options: RequestOption
         getScriptAsync(GetStoredScriptRequest(id).apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun RestHighLevelClient.deleteScript(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: DeleteStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
-        deleteScript(DeleteStoredScriptRequest(id).apply(block), options)
+inline fun RestHighLevelClient.index(options: RequestOptions = RequestOptions.DEFAULT, block: IndexRequest.() -> Unit = {}): IndexResponse =
+        index(IndexRequest().apply(block), options)
 
-inline fun RestHighLevelClient.deleteScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteStoredScriptRequest.() -> Unit = {}): Cancellable =
-        deleteScriptAsync(DeleteStoredScriptRequest(id).apply(block), options, listener)
+inline fun RestHighLevelClient.indexAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<IndexResponse>, block: IndexRequest.() -> Unit = {}): Cancellable =
+        indexAsync(IndexRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.mget(options: RequestOptions = RequestOptions.DEFAULT, block: MultiGetRequest.() -> Unit = {}): MultiGetResponse =
+        mget(MultiGetRequest().apply(block), options)
+
+inline fun RestHighLevelClient.mgetAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiGetResponse>, block: MultiGetRequest.() -> Unit = {}): Cancellable =
+        mgetAsync(MultiGetRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.msearch(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchRequest.() -> Unit = {}): MultiSearchResponse =
+        msearch(MultiSearchRequest().apply(block), options)
+
+inline fun RestHighLevelClient.msearchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiSearchResponse>, block: MultiSearchRequest.() -> Unit = {}): Cancellable =
+        msearchAsync(MultiSearchRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.msearchTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchTemplateRequest.() -> Unit = {}): MultiSearchTemplateResponse =
+        msearchTemplate(MultiSearchTemplateRequest().apply(block), options)
+
+inline fun RestHighLevelClient.msearchTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<MultiSearchTemplateResponse>, block: MultiSearchTemplateRequest.() -> Unit = {}): Cancellable =
+        msearchTemplateAsync(MultiSearchTemplateRequest().apply(block), options, listener)
+
+// TODO mtermvectors
 
 @Throws(IOException::class)
 inline fun RestHighLevelClient.putScript(options: RequestOptions = RequestOptions.DEFAULT, block: PutStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
@@ -271,3 +214,70 @@ inline fun RestHighLevelClient.putScript(options: RequestOptions = RequestOption
 
 inline fun RestHighLevelClient.putScriptAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutStoredScriptRequest.() -> Unit = {}): Cancellable =
         putScriptAsync(PutStoredScriptRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.rankEval(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, block: RankEvalRequest.() -> Unit = {}): RankEvalResponse =
+        rankEval(RankEvalRequest(rankingEvaluationSpec, indices).apply(block), options)
+
+inline fun RestHighLevelClient.rankEvalAsync(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<RankEvalResponse>, block: RankEvalRequest.() -> Unit = {}): Cancellable =
+        rankEvalAsync(RankEvalRequest(rankingEvaluationSpec, indices).apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.reindex(options: RequestOptions = RequestOptions.DEFAULT, block: ReindexRequest.() -> Unit = {}): BulkByScrollResponse =
+        reindex(ReindexRequest().apply(block), options)
+
+inline fun RestHighLevelClient.reindexAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkByScrollResponse>, block: ReindexRequest.() -> Unit = {}): Cancellable =
+        reindexAsync(ReindexRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.reindexRethrottle(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
+        reindexRethrottle(RethrottleRequest(taskId, requestsPerSecond).apply(block), options)
+
+inline fun RestHighLevelClient.reindexRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ListTasksResponse>, block: RethrottleRequest.() -> Unit = {}): Cancellable =
+        reindexRethrottleAsync(RethrottleRequest(taskId, requestsPerSecond).apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.scroll(options: RequestOptions = RequestOptions.DEFAULT, block: SearchScrollRequest.() -> Unit = {}): SearchResponse =
+        scroll(SearchScrollRequest().apply(block), options)
+
+inline fun RestHighLevelClient.scrollAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchResponse>, block: SearchScrollRequest.() -> Unit = {}): Cancellable =
+        scrollAsync(SearchScrollRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.search(options: RequestOptions = RequestOptions.DEFAULT, block: SearchRequest.() -> Unit = {}): SearchResponse =
+        search(SearchRequest().apply(block), options)
+
+inline fun RestHighLevelClient.searchAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchResponse>, block: SearchRequest.() -> Unit = {}): Cancellable =
+        searchAsync(SearchRequest().apply(block), options, listener)
+
+// TODO searchScroll
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.searchTemplate(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, block: SearchTemplateRequest.() -> Unit = {}): SearchTemplateResponse =
+        searchTemplate(SearchTemplateRequest().apply { setScript(script); setScriptType(scriptType) }.apply(block), options)
+
+inline fun RestHighLevelClient.searchTemplateAsync(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SearchTemplateResponse>, block: SearchTemplateRequest.() -> Unit = {}): Cancellable =
+        searchTemplateAsync(SearchTemplateRequest().apply { setScript(script); setScriptType(scriptType) }.apply(block), options, listener)
+
+// TODO termvectors
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.update(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateRequest.() -> Unit = {}): UpdateResponse =
+        update(UpdateRequest().apply(block), options)
+
+inline fun RestHighLevelClient.updateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<UpdateResponse>, block: UpdateRequest.() -> Unit = {}): Cancellable =
+        updateAsync(UpdateRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.updateByQuery(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
+        updateByQuery(UpdateByQueryRequest().apply(block), options)
+
+inline fun RestHighLevelClient.updateByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<BulkByScrollResponse>, block: UpdateByQueryRequest.() -> Unit = {}): Cancellable =
+        updateByQueryAsync(UpdateByQueryRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun RestHighLevelClient.updateByQueryRethrottle(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
+        updateByQueryRethrottle(RethrottleRequest(taskId, requestsPerSecond).apply(block), options)
+
+inline fun RestHighLevelClient.updateByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<ListTasksResponse>, block: RethrottleRequest.() -> Unit = {}): Cancellable =
+        updateByQueryRethrottleAsync(RethrottleRequest(taskId, requestsPerSecond).apply(block), options, listener)
