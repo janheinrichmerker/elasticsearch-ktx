@@ -1,3 +1,10 @@
+[![GitHub Actions](https://img.shields.io/github/workflow/status/reimersoftware/tex-gradle-plugin/Gradle%20CI?style=flat-square)](https://github.com/reimersoftware/tex-gradle-plugin/actions)
+[![Gradle plugin portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/dev/reimer/tex/dev.reimer.tex.gradle.plugin/maven-metadata.xml.svg?label=gradle&style=flat-square)](https://plugins.gradle.org/plugin/dev.reimer.tex)
+[![JitPack](https://img.shields.io/jitpack/v/github/reimersoftware/tex-gradle-plugin?style=flat-square)](https://jitpack.io/#dev.reimer/tex-gradle-plugin)
+
+
+
+
 [![JitPack](https://jitpack.io/v/dev.reimer/elasticsearch-ktx.svg)](https://jitpack.io/#dev.reimer/elasticsearch-ktx)
 
 # elasticsearch-ktx<sup>[α](#status-α)</sup>
