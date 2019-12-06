@@ -26,33 +26,7 @@ import java.io.IOException
 
 // See [Snapshot API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html).
 
-@Throws(IOException::class)
-inline fun SnapshotClient.getRepository(options: RequestOptions = RequestOptions.DEFAULT, block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
-        getRepository(GetRepositoriesRequest().apply(block), options)
-
-inline fun SnapshotClient.getRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetRepositoriesResponse>, block: GetRepositoriesRequest.() -> Unit = {}): Cancellable =
-        getRepositoryAsync(GetRepositoriesRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun SnapshotClient.createRepository(options: RequestOptions = RequestOptions.DEFAULT, block: PutRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
-        createRepository(PutRepositoryRequest().apply(block), options)
-
-inline fun SnapshotClient.createRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutRepositoryRequest.() -> Unit = {}): Cancellable =
-        createRepositoryAsync(PutRepositoryRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun SnapshotClient.deleteRepository(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
-        deleteRepository(DeleteRepositoryRequest().apply(block), options)
-
-inline fun SnapshotClient.deleteRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteRepositoryRequest.() -> Unit = {}): Cancellable =
-        deleteRepositoryAsync(DeleteRepositoryRequest().apply(block), options, listener)
-
-@Throws(IOException::class)
-inline fun SnapshotClient.verifyRepository(options: RequestOptions = RequestOptions.DEFAULT, block: VerifyRepositoryRequest.() -> Unit = {}): VerifyRepositoryResponse =
-        verifyRepository(VerifyRepositoryRequest().apply(block), options)
-
-inline fun SnapshotClient.verifyRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<VerifyRepositoryResponse>, block: VerifyRepositoryRequest.() -> Unit = {}): Cancellable =
-        verifyRepositoryAsync(VerifyRepositoryRequest().apply(block), options, listener)
+// TODO cleanupRepository
 
 @Throws(IOException::class)
 inline fun SnapshotClient.create(options: RequestOptions = RequestOptions.DEFAULT, block: CreateSnapshotRequest.() -> Unit = {}): CreateSnapshotResponse =
@@ -62,6 +36,27 @@ inline fun SnapshotClient.createAsync(options: RequestOptions = RequestOptions.D
         createAsync(CreateSnapshotRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
+inline fun SnapshotClient.createRepository(options: RequestOptions = RequestOptions.DEFAULT, block: PutRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
+        createRepository(PutRepositoryRequest().apply(block), options)
+
+inline fun SnapshotClient.createRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutRepositoryRequest.() -> Unit = {}): Cancellable =
+        createRepositoryAsync(PutRepositoryRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun SnapshotClient.delete(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteSnapshotRequest.() -> Unit = {}): AcknowledgedResponse =
+        delete(DeleteSnapshotRequest().apply(block), options)
+
+inline fun SnapshotClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteSnapshotRequest.() -> Unit = {}): Cancellable =
+        deleteAsync(DeleteSnapshotRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun SnapshotClient.deleteRepository(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
+        deleteRepository(DeleteRepositoryRequest().apply(block), options)
+
+inline fun SnapshotClient.deleteRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteRepositoryRequest.() -> Unit = {}): Cancellable =
+        deleteRepositoryAsync(DeleteRepositoryRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
 inline fun SnapshotClient.get(options: RequestOptions = RequestOptions.DEFAULT, block: GetSnapshotsRequest.() -> Unit = {}): GetSnapshotsResponse =
         get(GetSnapshotsRequest().apply(block), options)
 
@@ -69,11 +64,11 @@ inline fun SnapshotClient.getAsync(options: RequestOptions = RequestOptions.DEFA
         getAsync(GetSnapshotsRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun SnapshotClient.status(options: RequestOptions = RequestOptions.DEFAULT, block: SnapshotsStatusRequest.() -> Unit = {}): SnapshotsStatusResponse =
-        status(SnapshotsStatusRequest().apply(block), options)
+inline fun SnapshotClient.getRepository(options: RequestOptions = RequestOptions.DEFAULT, block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
+        getRepository(GetRepositoriesRequest().apply(block), options)
 
-inline fun SnapshotClient.statusAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SnapshotsStatusResponse>, block: SnapshotsStatusRequest.() -> Unit = {}): Cancellable =
-        statusAsync(SnapshotsStatusRequest().apply(block), options, listener)
+inline fun SnapshotClient.getRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetRepositoriesResponse>, block: GetRepositoriesRequest.() -> Unit = {}): Cancellable =
+        getRepositoryAsync(GetRepositoriesRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
 inline fun SnapshotClient.restore(options: RequestOptions = RequestOptions.DEFAULT, block: RestoreSnapshotRequest.() -> Unit = {}): RestoreSnapshotResponse =
@@ -83,8 +78,15 @@ inline fun SnapshotClient.restoreAsync(options: RequestOptions = RequestOptions.
         restoreAsync(RestoreSnapshotRequest().apply(block), options, listener)
 
 @Throws(IOException::class)
-inline fun SnapshotClient.delete(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteSnapshotRequest.() -> Unit = {}): AcknowledgedResponse =
-        delete(DeleteSnapshotRequest().apply(block), options)
+inline fun SnapshotClient.status(options: RequestOptions = RequestOptions.DEFAULT, block: SnapshotsStatusRequest.() -> Unit = {}): SnapshotsStatusResponse =
+        status(SnapshotsStatusRequest().apply(block), options)
 
-inline fun SnapshotClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: DeleteSnapshotRequest.() -> Unit = {}): Cancellable =
-        deleteAsync(DeleteSnapshotRequest().apply(block), options, listener)
+inline fun SnapshotClient.statusAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<SnapshotsStatusResponse>, block: SnapshotsStatusRequest.() -> Unit = {}): Cancellable =
+        statusAsync(SnapshotsStatusRequest().apply(block), options, listener)
+
+@Throws(IOException::class)
+inline fun SnapshotClient.verifyRepository(options: RequestOptions = RequestOptions.DEFAULT, block: VerifyRepositoryRequest.() -> Unit = {}): VerifyRepositoryResponse =
+        verifyRepository(VerifyRepositoryRequest().apply(block), options)
+
+inline fun SnapshotClient.verifyRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<VerifyRepositoryResponse>, block: VerifyRepositoryRequest.() -> Unit = {}): Cancellable =
+        verifyRepositoryAsync(VerifyRepositoryRequest().apply(block), options, listener)
