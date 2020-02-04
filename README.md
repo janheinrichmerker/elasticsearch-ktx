@@ -1,7 +1,7 @@
 [![GitHub Actions](https://img.shields.io/github/workflow/status/reimersoftware/elasticsearch-ktx/Gradle%20CI?style=flat-square)](https://github.com/reimersoftware/elasticsearch-ktx/actions)
 [![JitPack](https://img.shields.io/jitpack/v/github/reimersoftware/elasticsearch-ktx?style=flat-square)](https://jitpack.io/#dev.reimer/elasticsearch-ktx)
 
-# elasticsearch-ktx<sup>[α](#status-α)</sup>
+# 🔎 elasticsearch-ktx<sup>[α](#status-α)</sup>
 
 Kotlin extensions for the Elasticsearch [Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html) (unofficial).
 
