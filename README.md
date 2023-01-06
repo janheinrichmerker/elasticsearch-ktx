@@ -1,5 +1,5 @@
-[![GitHub Actions](https://img.shields.io/github/workflow/status/reimersoftware/elasticsearch-ktx/Gradle%20CI?style=flat-square)](https://github.com/reimersoftware/elasticsearch-ktx/actions)
-[![JitPack](https://img.shields.io/jitpack/v/github/reimersoftware/elasticsearch-ktx?style=flat-square)](https://jitpack.io/#dev.reimer/elasticsearch-ktx)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/heinrichreimer/elasticsearch-ktx/gradle.yml?branch=main&style=flat-square)](https://github.com/heinrichreimer/elasticsearch-ktx/actions/workflows/gradle.yml)
+[![JitPack](https://img.shields.io/jitpack/v/github/heinrichreimer/elasticsearch-ktx?style=flat-square)](https://jitpack.io/#dev.reimer/elasticsearch-ktx)
 
 # 🔎 elasticsearch-ktx<sup>[α](#status-α)</sup>
 
