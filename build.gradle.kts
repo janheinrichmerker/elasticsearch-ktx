@@ -16,7 +16,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-    compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.5.0")
+    compileOnly("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.18")
 }
 
 // Compile Kotlin to JVM1.8 bytecode.
