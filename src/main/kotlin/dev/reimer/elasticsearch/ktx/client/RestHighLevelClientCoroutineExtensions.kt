@@ -45,87 +45,87 @@ import org.elasticsearch.tasks.TaskId
 
 // See [REST APIs on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html).
 
-suspend inline fun RestHighLevelClient.bulkAsync(options: RequestOptions = RequestOptions.DEFAULT, block: BulkRequest.() -> Unit = {}): BulkResponse =
+suspend inline fun RestHighLevelClient.bulkAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: BulkRequest.() -> Unit = {}): BulkResponse =
         awaitAction { bulkAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.clearScrollAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ClearScrollRequest.() -> Unit = {}): ClearScrollResponse =
+suspend inline fun RestHighLevelClient.clearScrollAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ClearScrollRequest.() -> Unit = {}): ClearScrollResponse =
         awaitAction { clearScrollAsync(options, it, block) }
 
 // TODO count
 
-suspend inline fun RestHighLevelClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRequest.() -> Unit = {}): DeleteResponse =
+suspend inline fun RestHighLevelClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: DeleteRequest.() -> Unit = {}): DeleteResponse =
         awaitAction { deleteAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.deleteByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
+suspend inline fun RestHighLevelClient.deleteByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: DeleteByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
         awaitAction { deleteByQueryAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.deleteByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
+suspend inline fun RestHighLevelClient.deleteByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
         awaitAction { deleteByQueryRethrottleAsync(taskId, requestsPerSecond, options, it, block) }
 
-suspend inline fun RestHighLevelClient.deleteScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: DeleteStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
+suspend inline fun RestHighLevelClient.deleteScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: DeleteStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { deleteScriptAsync(id, options, it, block) }
 
-suspend inline fun RestHighLevelClient.existsAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetRequest.() -> Unit = {}): Boolean =
+suspend inline fun RestHighLevelClient.existsAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: GetRequest.() -> Unit = {}): Boolean =
         awaitAction { existsAsync(options, it, block) }
 
 // TODO existsSource
 
-suspend inline fun RestHighLevelClient.explainAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ExplainRequest.() -> Unit = {}): ExplainResponse =
+suspend inline fun RestHighLevelClient.explainAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ExplainRequest.() -> Unit = {}): ExplainResponse =
         awaitAction { explainAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.fieldCapsAsync(options: RequestOptions = RequestOptions.DEFAULT, block: FieldCapabilitiesRequest.() -> Unit = {}): FieldCapabilitiesResponse =
+suspend inline fun RestHighLevelClient.fieldCapsAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: FieldCapabilitiesRequest.() -> Unit = {}): FieldCapabilitiesResponse =
         awaitAction { fieldCapsAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetRequest.() -> Unit = {}): GetResponse =
+suspend inline fun RestHighLevelClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: GetRequest.() -> Unit = {}): GetResponse =
         awaitAction { getAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.getScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, block: GetStoredScriptRequest.() -> Unit = {}): GetStoredScriptResponse =
+suspend inline fun RestHighLevelClient.getScriptAsync(id: String, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: GetStoredScriptRequest.() -> Unit = {}): GetStoredScriptResponse =
         awaitAction { getScriptAsync(id, options, it, block) }
 
-suspend inline fun RestHighLevelClient.indexAsync(options: RequestOptions = RequestOptions.DEFAULT, block: IndexRequest.() -> Unit = {}): IndexResponse =
+suspend inline fun RestHighLevelClient.indexAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: IndexRequest.() -> Unit = {}): IndexResponse =
         awaitAction { indexAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.mgetAsync(options: RequestOptions = RequestOptions.DEFAULT, block: MultiGetRequest.() -> Unit = {}): MultiGetResponse =
+suspend inline fun RestHighLevelClient.mgetAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: MultiGetRequest.() -> Unit = {}): MultiGetResponse =
         awaitAction { mgetAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.msearchAsync(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchRequest.() -> Unit = {}): MultiSearchResponse =
+suspend inline fun RestHighLevelClient.msearchAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: MultiSearchRequest.() -> Unit = {}): MultiSearchResponse =
         awaitAction { msearchAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.msearchTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, block: MultiSearchTemplateRequest.() -> Unit = {}): MultiSearchTemplateResponse =
+suspend inline fun RestHighLevelClient.msearchTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: MultiSearchTemplateRequest.() -> Unit = {}): MultiSearchTemplateResponse =
         awaitAction { msearchTemplateAsync(options, it, block) }
 
 // TODO mtermvectors
 
-suspend inline fun RestHighLevelClient.putScriptAsync(options: RequestOptions = RequestOptions.DEFAULT, block: PutStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
+suspend inline fun RestHighLevelClient.putScriptAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: PutStoredScriptRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { putScriptAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.rankEvalAsync(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, block: RankEvalRequest.() -> Unit = {}): RankEvalResponse =
+suspend inline fun RestHighLevelClient.rankEvalAsync(rankingEvaluationSpec: RankEvalSpec, indices: Array<String>, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: RankEvalRequest.() -> Unit = {}): RankEvalResponse =
         awaitAction { rankEvalAsync(rankingEvaluationSpec, indices, options, it, block) }
 
-suspend inline fun RestHighLevelClient.reindexAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ReindexRequest.() -> Unit = {}): BulkByScrollResponse =
+suspend inline fun RestHighLevelClient.reindexAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ReindexRequest.() -> Unit = {}): BulkByScrollResponse =
         awaitAction { reindexAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.reindexRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
+suspend inline fun RestHighLevelClient.reindexRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
         awaitAction { reindexRethrottleAsync(taskId, requestsPerSecond, options, it, block) }
 
-suspend inline fun RestHighLevelClient.scrollAsync(options: RequestOptions = RequestOptions.DEFAULT, block: SearchScrollRequest.() -> Unit = {}): SearchResponse =
+suspend inline fun RestHighLevelClient.scrollAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: SearchScrollRequest.() -> Unit = {}): SearchResponse =
         awaitAction { scrollAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.searchAsync(options: RequestOptions = RequestOptions.DEFAULT, block: SearchRequest.() -> Unit = {}): SearchResponse =
+suspend inline fun RestHighLevelClient.searchAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: SearchRequest.() -> Unit = {}): SearchResponse =
         awaitAction { searchAsync(options, it, block) }
 
 // TODO searchScroll
 
-suspend inline fun RestHighLevelClient.searchTemplateAsync(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, block: SearchTemplateRequest.() -> Unit = {}): SearchTemplateResponse =
+suspend inline fun RestHighLevelClient.searchTemplateAsync(script: String, scriptType: ScriptType, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: SearchTemplateRequest.() -> Unit = {}): SearchTemplateResponse =
         awaitAction { searchTemplateAsync(script, scriptType, options, it, block) }
 
 // TODO termvectors
 
-suspend inline fun RestHighLevelClient.updateAsync(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateRequest.() -> Unit = {}): UpdateResponse =
+suspend inline fun RestHighLevelClient.updateAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: UpdateRequest.() -> Unit = {}): UpdateResponse =
         awaitAction { updateAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.updateByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: UpdateByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
+suspend inline fun RestHighLevelClient.updateByQueryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: UpdateByQueryRequest.() -> Unit = {}): BulkByScrollResponse =
         awaitAction { updateByQueryAsync(options, it, block) }
 
-suspend inline fun RestHighLevelClient.updateByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
+suspend inline fun RestHighLevelClient.updateByQueryRethrottleAsync(taskId: TaskId, requestsPerSecond: Float = Float.POSITIVE_INFINITY, options: RequestOptions = RequestOptions.DEFAULT, crossinline block: RethrottleRequest.() -> Unit = {}): ListTasksResponse =
         awaitAction { updateByQueryRethrottleAsync(taskId, requestsPerSecond, options, it, block) }

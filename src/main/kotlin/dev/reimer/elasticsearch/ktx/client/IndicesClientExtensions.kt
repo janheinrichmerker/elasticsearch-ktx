@@ -81,10 +81,14 @@ inline fun IndicesClient.deleteAsync(options: RequestOptions = RequestOptions.DE
 
 // TODO deleteTemplate
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.exists(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexRequest.() -> Unit = {}): Boolean =
         exists(GetIndexRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.existsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<Boolean>, block: GetIndexRequest.() -> Unit = {}): Cancellable =
         existsAsync(GetIndexRequest().apply(block), options, listener)
 
@@ -120,10 +124,14 @@ inline fun IndicesClient.forcemergeAsync(options: RequestOptions = RequestOption
 
 // TODO freeze
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.get(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexRequest.() -> Unit = {}): GetIndexResponse =
         get(GetIndexRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetIndexResponse>, block: GetIndexRequest.() -> Unit = {}): Cancellable =
         getAsync(GetIndexRequest().apply(block), options, listener)
 
@@ -134,19 +142,27 @@ inline fun IndicesClient.getAlias(options: RequestOptions = RequestOptions.DEFAU
 inline fun IndicesClient.getAliasAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetAliasesResponse>, block: GetAliasesRequest.() -> Unit = {}): Cancellable =
         getAliasAsync(GetAliasesRequest().apply(block), options, listener)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.getFieldMapping(options: RequestOptions = RequestOptions.DEFAULT, block: GetFieldMappingsRequest.() -> Unit = {}): GetFieldMappingsResponse =
         getFieldMapping(GetFieldMappingsRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.getFieldMappingAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetFieldMappingsResponse>, block: GetFieldMappingsRequest.() -> Unit = {}): Cancellable =
         getFieldMappingAsync(GetFieldMappingsRequest().apply(block), options, listener)
 
 // TODO getIndexTemplate
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.getMapping(options: RequestOptions = RequestOptions.DEFAULT, block: GetMappingsRequest.() -> Unit = {}): GetMappingsResponse =
         getMapping(GetMappingsRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.getMappingAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetMappingsResponse>, block: GetMappingsRequest.() -> Unit = {}): Cancellable =
         getMappingAsync(GetMappingsRequest().apply(block), options, listener)
 
@@ -157,10 +173,14 @@ inline fun IndicesClient.getSettings(options: RequestOptions = RequestOptions.DE
 inline fun IndicesClient.getSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetSettingsResponse>, block: GetSettingsRequest.() -> Unit = {}): Cancellable =
         getSettingsAsync(GetSettingsRequest().apply(block), options, listener)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.getTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: GetIndexTemplatesRequest.() -> Unit = {}): GetIndexTemplatesResponse? =
         getTemplate(GetIndexTemplatesRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.getTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<GetIndexTemplatesResponse>, block: GetIndexTemplatesRequest.() -> Unit = {}): Cancellable =
         getTemplateAsync(GetIndexTemplatesRequest().apply(block), options, listener)
 
@@ -171,10 +191,14 @@ inline fun IndicesClient.open(options: RequestOptions = RequestOptions.DEFAULT, 
 inline fun IndicesClient.openAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<OpenIndexResponse>, block: OpenIndexRequest.() -> Unit = {}): Cancellable =
         openAsync(OpenIndexRequest().apply(block), options, listener)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.putMapping(options: RequestOptions = RequestOptions.DEFAULT, block: PutMappingRequest.() -> Unit = {}): AcknowledgedResponse =
         putMapping(PutMappingRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.putMappingAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutMappingRequest.() -> Unit = {}): Cancellable =
         putMappingAsync(PutMappingRequest().apply(block), options, listener)
 
@@ -185,10 +209,14 @@ inline fun IndicesClient.putSettings(options: RequestOptions = RequestOptions.DE
 inline fun IndicesClient.putSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: UpdateSettingsRequest.() -> Unit = {}): Cancellable =
         putSettingsAsync(UpdateSettingsRequest().apply(block), options, listener)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.putTemplate(options: RequestOptions = RequestOptions.DEFAULT, block: PutIndexTemplateRequest.() -> Unit = {}): AcknowledgedResponse =
         putTemplate(PutIndexTemplateRequest().apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.putTemplateAsync(options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<AcknowledgedResponse>, block: PutIndexTemplateRequest.() -> Unit = {}): Cancellable =
         putTemplateAsync(PutIndexTemplateRequest().apply(block), options, listener)
 
@@ -201,10 +229,14 @@ inline fun IndicesClient.refreshAsync(options: RequestOptions = RequestOptions.D
 
 // TODO reloadAnalyzers
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 @Throws(IOException::class)
 inline fun IndicesClient.rollover(alias: String, newIndexName: String, options: RequestOptions = RequestOptions.DEFAULT, block: RolloverRequest.() -> Unit = {}): RolloverResponse =
         rollover(RolloverRequest(alias, newIndexName).apply(block), options)
 
+@Deprecated(message = "Deprecated in Java")
+@Suppress("DEPRECATION")
 inline fun IndicesClient.rolloverAsync(alias: String, newIndexName: String, options: RequestOptions = RequestOptions.DEFAULT, listener: ActionListener<RolloverResponse>, block: RolloverRequest.() -> Unit = {}): Cancellable =
         rolloverAsync(RolloverRequest(alias, newIndexName).apply(block), options, listener)
 

@@ -26,29 +26,29 @@ import org.elasticsearch.client.SnapshotClient
 
 // TODO cleanupRepository
 
-suspend inline fun SnapshotClient.createAsync(options: RequestOptions = RequestOptions.DEFAULT, block: CreateSnapshotRequest.() -> Unit = {}): CreateSnapshotResponse =
+suspend inline fun SnapshotClient.createAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: CreateSnapshotRequest.() -> Unit = {}): CreateSnapshotResponse =
         awaitAction { createAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.createRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: PutRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
+suspend inline fun SnapshotClient.createRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: PutRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { createRepositoryAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteSnapshotRequest.() -> Unit = {}): AcknowledgedResponse =
+suspend inline fun SnapshotClient.deleteAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: DeleteSnapshotRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { deleteAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.deleteRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: DeleteRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
+suspend inline fun SnapshotClient.deleteRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: DeleteRepositoryRequest.() -> Unit = {}): AcknowledgedResponse =
         awaitAction { deleteRepositoryAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetSnapshotsRequest.() -> Unit = {}): GetSnapshotsResponse =
+suspend inline fun SnapshotClient.getAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: GetSnapshotsRequest.() -> Unit = {}): GetSnapshotsResponse =
         awaitAction { getAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.getRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
+suspend inline fun SnapshotClient.getRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: GetRepositoriesRequest.() -> Unit = {}): GetRepositoriesResponse =
         awaitAction { getRepositoryAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.restoreAsync(options: RequestOptions = RequestOptions.DEFAULT, block: RestoreSnapshotRequest.() -> Unit = {}): RestoreSnapshotResponse =
+suspend inline fun SnapshotClient.restoreAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: RestoreSnapshotRequest.() -> Unit = {}): RestoreSnapshotResponse =
         awaitAction { restoreAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.statusAsync(options: RequestOptions = RequestOptions.DEFAULT, block: SnapshotsStatusRequest.() -> Unit = {}): SnapshotsStatusResponse =
+suspend inline fun SnapshotClient.statusAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: SnapshotsStatusRequest.() -> Unit = {}): SnapshotsStatusResponse =
         awaitAction { statusAsync(options, it, block) }
 
-suspend inline fun SnapshotClient.verifyRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, block: VerifyRepositoryRequest.() -> Unit = {}): VerifyRepositoryResponse =
+suspend inline fun SnapshotClient.verifyRepositoryAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: VerifyRepositoryRequest.() -> Unit = {}): VerifyRepositoryResponse =
         awaitAction { verifyRepositoryAsync(options, it, block) }

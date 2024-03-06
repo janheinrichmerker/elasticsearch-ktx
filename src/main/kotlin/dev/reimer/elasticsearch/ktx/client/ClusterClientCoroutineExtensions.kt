@@ -14,11 +14,11 @@ import org.elasticsearch.client.RequestOptions
 
 // See [Cluster API on elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html).
 
-suspend inline fun ClusterClient.getSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterGetSettingsRequest.() -> Unit = {}): ClusterGetSettingsResponse =
+suspend inline fun ClusterClient.getSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ClusterGetSettingsRequest.() -> Unit = {}): ClusterGetSettingsResponse =
     awaitAction { getSettingsAsync(options, it, block) }
 
-suspend inline fun ClusterClient.healthAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterHealthRequest.() -> Unit = {}): ClusterHealthResponse =
+suspend inline fun ClusterClient.healthAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ClusterHealthRequest.() -> Unit = {}): ClusterHealthResponse =
     awaitAction { healthAsync(options, it, block) }
 
-suspend inline fun ClusterClient.putSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, block: ClusterUpdateSettingsRequest.() -> Unit = {}): ClusterUpdateSettingsResponse =
+suspend inline fun ClusterClient.putSettingsAsync(options: RequestOptions = RequestOptions.DEFAULT, crossinline block: ClusterUpdateSettingsRequest.() -> Unit = {}): ClusterUpdateSettingsResponse =
     awaitAction { putSettingsAsync(options, it, block) }
